@@ -1,0 +1,37 @@
+# Task 3 - Auto Scaling and Load Balancer Setup
+
+## Objective
+
+Create a scalable AWS environment using EC2, Application Load Balancer, and Auto Scaling Group.
+
+## Services Used
+
+* Amazon EC2
+* Amazon Machine Image (AMI)
+* Launch Template
+* Application Load Balancer (ALB)
+* Target Group
+* Auto Scaling Group (ASG)
+
+## Steps Performed
+
+1. Launched an EC2 instance named WebServer-1.
+2. Installed and configured Apache2 Web Server.
+3. Created a custom web page displaying "Server 1".
+4. Created an AMI from the configured instance.
+5. Created a Launch Template using the AMI.
+6. Created a Target Group and registered the instance.
+7. Created an Application Load Balancer.
+8. Connected the Load Balancer to the Target Group.
+9. Created an Auto Scaling Group using the Launch Template.
+10. Configured:
+
+* Desired Capacity = 2
+* Minimum Capacity = 2
+* Maximum Capacity = 4
+
+11. Verified that the Auto Scaling Group launched and maintained 2 healthy instances.
+
+## Result
+
+Successfully implemented Auto Scaling and Load Balancing on AWS. The environment automatically maintains healthy instances and distributes incoming traffic through the Application Load Balancer.
