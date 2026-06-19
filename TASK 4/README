@@ -1,0 +1,168 @@
+# Task 4 - CI/CD Pipeline using GitHub Actions and AWS EC2
+
+## Objective
+To implement a Continuous Integration and Continuous Deployment (CI/CD) pipeline using GitHub Actions and AWS EC2 for automated web application deployment.
+
+---
+
+## Tools and Technologies Used
+
+- AWS EC2 (Ubuntu)
+- Apache2 Web Server
+- GitHub Repository
+- GitHub Actions
+- SSH Authentication
+- Linux Commands
+
+---
+
+## Implementation Steps
+
+### Step 1: Launch AWS EC2 Instance
+
+- Created an Ubuntu EC2 instance on AWS.
+- Configured Security Group to allow:
+  - SSH (Port 22)
+  - HTTP (Port 80)
+
+### Step 2: Install Apache Web Server
+
+```bash
+sudo apt update
+sudo apt install apache2 -y
+```
+
+Verified Apache installation by accessing the EC2 public IP in a browser.
+
+---
+
+### Step 3: Configure SSH Authentication
+
+Generated SSH key pair:
+
+```bash
+ssh-keygen -t rsa
+```
+
+Added the public key to:
+
+```bash
+~/.ssh/authorized_keys
+```
+
+---
+
+### Step 4: Configure GitHub Secrets
+
+Added the following secrets in:
+
+Settings → Secrets and Variables → Actions
+
+| Secret Name | Description |
+|------------|-------------|
+| HOST | EC2 Public IP Address |
+| USERNAME | Ubuntu |
+| SSH_KEY | Private SSH Key |
+
+---
+
+### Step 5: Create GitHub Actions Workflow
+
+Created:
+
+```text
+.github/workflows/deploy.yml
+```
+
+Workflow automatically deploys changes to EC2 whenever code is pushed to the main branch.
+
+---
+
+### Step 6: Deployment Workflow
+
+The workflow performs:
+
+1. Checkout Repository
+2. Connect to EC2 via SSH
+3. Update web content inside Apache web directory
+4. Deploy changes automatically
+
+---
+
+## Workflow File
+
+```yaml
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo bash -c 'echo "<h1>Deployment Successful from GitHub Actions</h1>" > /var/www/html/index.html'
+```
+
+---
+
+## Screenshots
+
+### 1. AWS EC2 Instance
+
+![AWS EC2 Instance](AWS%20EC2%20Instance.png)
+
+---
+
+### 2. GitHub Secrets
+
+![GitHub Secrets](GitHub%20Secrets.png)
+
+---
+
+### 3. Workflow File
+
+![Workflow File](deploy.yml%20Workflow%20File.png)
+
+---
+
+### 4. Successful GitHub Actions Run
+
+![GitHub Actions](Successful%20GitHub%20Actions%20Run.png)
+
+---
+
+### 5. Deployed Website
+
+![Deployed Website](Deployed%20Website.png)
+
+---
+
+## Result
+
+The CI/CD pipeline was successfully implemented using GitHub Actions and AWS EC2. Whenever code changes are pushed to the GitHub repository, the workflow automatically connects to the EC2 instance and deploys the updated content.
+
+---
+
+## Deployment URL
+
+http://13.51.235.212
+
+---
+
+## Conclusion
+
+Successfully implemented an automated CI/CD pipeline using GitHub Actions and AWS EC2. The deployment process is fully automated and updates are reflected on the web server without manual intervention.
