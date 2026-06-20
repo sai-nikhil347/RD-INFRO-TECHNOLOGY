@@ -1,0 +1,31 @@
+# Task 5 - Dockerize an Application
+
+## Objective
+Containerize a simple web application using Docker and deploy it on AWS EC2.
+
+## Tools Used
+- AWS EC2
+- Ubuntu
+- Docker
+- Nginx
+
+## Steps Performed
+
+1. Installed Docker on EC2.
+2. Started Docker service.
+3. Created index.html.
+4. Created Dockerfile.
+5. Built Docker image.
+6. Ran Docker container.
+7. Exposed container on port 8080.
+8. Updated Security Group rules.
+9. Accessed application through browser.
+
+## Commands Used
+
+```bash
+docker --version
+docker build -t task5-app .
+docker images
+docker run -d -p 8080:80 --name task5-container task5-app
+docker ps
