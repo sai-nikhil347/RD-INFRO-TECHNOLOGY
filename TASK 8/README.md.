@@ -1,0 +1,26 @@
+# Task 8: Set IAM Roles and Policies
+
+## Objective
+Configure IAM users, groups, and policies to securely manage access to AWS resources.
+
+## Steps Performed
+1. Opened the AWS IAM Console.
+2. Created an IAM User Group named **Task8Group**.
+3. Attached the **AmazonS3FullAccess** AWS managed policy to the group.
+4. Created an IAM user named **Task8User**.
+5. Added **Task8User** to **Task8Group**.
+6. Verified that the user inherited the **AmazonS3FullAccess** permission through the group.
+
+## AWS Services Used
+- AWS Identity and Access Management (IAM)
+
+## Policy Used
+- AmazonS3FullAccess
+
+## Outcome
+Successfully created an IAM user, assigned the user to an IAM group, attached the required policy, and verified that the permissions were inherited correctly.
+
+## Screenshots
+- Screenshot 1: IAM Group with AmazonS3FullAccess Policy Attached
+- Screenshot 2: IAM User Created (Task8User)
+- Screenshot 3: User Permissions Showing AmazonS3FullAccess via Task8Group
